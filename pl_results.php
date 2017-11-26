@@ -1,5 +1,5 @@
 <?php  
-    include'team.class.php';
+    include 'team.class.php';
 
     //get fixture data from football-data.org
     $uri = 'http://api.football-data.org/v1/competitions/445/fixtures';
@@ -12,20 +12,51 @@
 
     //Create a teams array
     $teams = array();
+
+    //loop through football-data API data.  Create Team class for each team, and process result for each fixture
     foreach ($fixtures as $f) {
-      //Check to see if teams exist as class instances
-      if (!in_array($f->homeTeamName, $teams)) {
+
+      //Only run if the fixture's status is FINISHED
+      if ($f->status == 'FINISHED') {
+        //Check to see if teams exist as class instances
+        //conditions should only be met once for each team in league. Creates a class instance for each team
         $home_team_name = $f->homeTeamName;
-        $$team_name = new Team();
-        array_push($teams, $home_team_name);
-      }
-      if (!in_array($f->awayTeamName, $teams)) {
+        if (!in_array($home_team_name, $teams)) {
+          $$home_team_name = new Team();
+          $$home_team_name->team_name = $home_team_name;
+          array_push($teams, $home_team_name);
+        }
         $away_team_name = $f->awayTeamName;
-        $$team_name = new Team();
-        array_push($teams, $away_team_name);
+        if (!in_array($away_team_name, $teams)) {
+          $$away_team_name = new Team();
+          $$away_team_name->team_name = $away_team_name;
+          array_push($teams, $away_team_name);
+        }
+
+        //add the score to the team class instances
+        $$home_team_name->add_result($f->result->goalsHomeTeam, $f->result->goalsAwayTeam);
+        $$away_team_name->add_result($f->result->goalsAwayTeam, $f->result->goalsHomeTeam);
       }
-      $$team_name->add_result($f->)
     }
 
+    //loop through teams and create league array
+    $actual_league = array();
+    foreach ($teams as $team) {
+      $actual_league[] = $$team;
+    }
+    usort($actual_league, 'sort_league_by_points');
 
+    echo '<pre>';
+      print_r($actual_league);
+    echo '</pre>';
+
+
+
+    function sort_league_by_points($a, $b) {
+      // returns total points sorted in descending order
+      if ($a->total_points == $b->total_points) { 
+        return 0; 
+      }
+      return ($a->total_points > $b->total_points) ? -1 : 1;
+    }
 ?>

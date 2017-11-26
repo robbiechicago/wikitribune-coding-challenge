@@ -10,10 +10,8 @@
   </div>
 
   <?php  
+  error_reporting(E_ALL);
   include 'pl_results.php';
-  echo '<pre>';
-    print_r($teams);
-  echo '</pre>';
   ?>
 
 </body>

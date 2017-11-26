@@ -1,5 +1,4 @@
 <?php  
-    include 'team.class.php';
 
     //get fixture data from football-data.org
     $uri = 'http://api.football-data.org/v1/competitions/445/fixtures';

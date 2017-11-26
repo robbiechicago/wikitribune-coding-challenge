@@ -46,10 +46,6 @@
     }
     usort($actual_league, 'sort_league_by_points');
 
-    echo '<pre>';
-      print_r($actual_league);
-    echo '</pre>';
-
 
 
     function sort_league_by_points($a, $b) {

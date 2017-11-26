@@ -9,5 +9,12 @@
     <h1>Hello world!</h1>
   </div>
 
+  <?php  
+  include 'pl_results.php';
+  echo '<pre>';
+    print_r($teams);
+  echo '</pre>';
+  ?>
+
 </body>
 </html>

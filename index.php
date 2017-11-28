@@ -17,6 +17,7 @@
 
     <div style="width:48%; display: inline-block; float: left">
       <h2>Actual Premier League Table</h2>
+      <br />
       <table>
         <tr>
           <th>&nbsp;</th>
@@ -45,10 +46,11 @@
     </div>
 
     <div style="width:48%; display: inline-block; float: left">
-      <h2>tenpredict predictions</h2>
       <?php  
       include 'tenp_predictions.php';
+      $user_label = isset($_GET['selected_user']) ? ' - User: '.$_GET['selected_user'] : '';
       ?>
+      <h2>tenpredict predictions<?= $user_label; ?></h2>
       <form method="GET" action="">
         <select name="selected_user" id="selected_user">
           <option value="">Select a user</option>

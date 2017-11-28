@@ -1,3 +1,11 @@
 body {
   font-family: 'PT Sans', sans-serif;
 }
+
+th {
+  padding: 0 5px;
+}
+
+td {
+  text-align: center;
+}
